@@ -1,0 +1,9 @@
+1.创建一个spring boot 项目
+2.创建一个配置类
+3.创建若干数据源的bean，支持切换
+4.创建AbstractRoutingDataSource的实现类，并创建该类的bean,假设类为
+public class DynamicDataSource extends AbstractRoutingDataSource 
+创建DynamicDataSource的bean的时候，设置这个bean的两个属性，分别是defaultTargetDataSource和targetDataSources，
+其中targetDataSources是个Map集合，包含了可选的数据源
+同时这个类还重写了determineCurrentLookupKey方法，就是用来通过数据源bean名称对几个可选数据源进行选择
+DynamicDataSource的bean名称为dataSource,它覆盖了框架的同名bean，作为通往数据库访问的代理
